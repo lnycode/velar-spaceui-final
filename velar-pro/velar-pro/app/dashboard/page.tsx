@@ -1,0 +1,1 @@
+import MigraineChart from "@/components/MigraineChart"; import uswSWR from "swr"; const fetcher=(url:string)=>fetcher(url).then(res=>res.json()); export default function Dashboard(){const {data}=useSWR("/api/migraines",fetcher);return <main className="p-6><h1 className="text-2x1 font-bold">Velar Dashboard 🚀</h1>{data?<MigraineChart data={data.data}/>:<p>Loading...</p>}</main>}

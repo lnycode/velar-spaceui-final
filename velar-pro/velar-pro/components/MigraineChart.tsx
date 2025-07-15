@@ -1,0 +1,1 @@
+export default function MigraineChart({data}:{data:any[]}){return <div className="p-4"><h2 className="text-x1 mb-2">Migraine History</h2>ResponsiveContainer width="100%" height={300}><LineChart data={data}><Line type="monotone" dataKey="intensity" stroke="#8884d8 /><XAxis dataKey="date" /><YAxis /><Tooltip /><Legend /><LineChart></ResponsiveContainer></div>;}
