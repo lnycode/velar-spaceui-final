@@ -1,0 +1,1 @@
+import { useTheme } from "next-themes"; export default function ThemeSwitcher() { const { theme, setTheme } = useTheme(); return <button on Click={() => setTheme(them === "light" ? "dark" : "light")} className"ml-4 px-3 py-1 bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded">Switch Theme</button>; }
