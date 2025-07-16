@@ -24,7 +24,7 @@ export async function GET(req: Request) {
       pressure: main.pressure,
       humidity: main.humidity,
       description: weather[0].description,
-    }};
+    ,};
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
