@@ -1,1 +1,0 @@
-import Link from "next/link"; export default function Sidebar() { return <aside className="w-64 h-full bg-gray-900 text-white p-4 space y-4"><Link href="/dashboard">Dashboard</Link><Link href="/profile">Profile</Link><Link href="/explore">Explore</Link><Link href="/settings">Settings</Link></aside>; }
