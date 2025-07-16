@@ -14,8 +14,8 @@ export async function GET(req: Request) {
   
   try {
     const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&{lon}&units=metric&appid=${API_KEY}`
-    };
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon={lon}&units=metric&appid=${API_KEY}`
+    );
 
     const { main, weather } = response.data;
 
