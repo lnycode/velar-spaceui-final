@@ -1,28 +1,15 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
+import React from "react";
 
-export default function BotAlert() {
-  const [alert, setAlert] = useState<string | null>(null)
-
-  useEffect(() => {
-    // Simulierter KI-Alert basierend auf Dummy-Logs
-    const logsRaw = localStorage.getItem('velar-logs')
-    if (logsRaw) {
-      const logs = JSON.parse(logsRaw)
-      const highDays = logs.filter((l: any) => l.intensity >= 6)
-      if (highDays.length >= 2) {
-        setAlert('⚠️ KI-Hinweis: Häufung starker Migräne – mögliche Wetterfront oder Stressphase.')
-      } else {
-        setAlert('✅ Keine akuten Warnungen basierend auf den letzten Tagen.')
-      }
-    }
-  }, [])
-
+export function BotAlert() {
   return (
-    <div className="bg-zinc-900 p-6 rounded-xl shadow-lg text-center">
-      <h2 className="text-xl font-bold text-purple-300 mb-4">🤖 KI-Prognose</h2>
-      <p className="text-md text-white">{alert ?? 'Analysiere Daten...'}</p>
+    <div className="bg-gradient-to-r from-purple-900 to-cyan-900 p-6 rounded-xl shadow-lg space-y-3 border border-cyan-800">
+      <h2 className="text-xl font-semibold text-pink-400">🤖 KI-Warnung</h2>
+      <p className="text-sm text-slate-200">
+        Basierend auf deinen Logs sind die nächsten 48h ein Risikofenster für eine Migräne-Episode. 🧠
+      </p>
+      <p className="text-sm text-cyan-300">Empfehlung: Trinke genug Wasser und meide Stressoren.</p>
     </div>
-  )
+  );
 }

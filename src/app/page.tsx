@@ -1,60 +1,89 @@
 "use client";
 
-import { useState } from "react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import VelarDashboard from "@/components/VelarDashboard";
-import PdfExportButton from "@/components/PdfExportButton";
-import LogsPanel from "@/components/LogsPanel";
-import BotAlert from "@/components/BotAlert";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
+import { VelarDashboard } from "@/components/VelarDashboard";
+import { PdfExportButton } from "@/components/PdfExportButton";
+import { LogsPanel } from "@/components/LogsPanel";
+import { BotAlert } from "@/components/BotAlert";
 
-export default function Page() {
-  const [tab, setTab] = useState("forecast");
-
+export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#0a0a14] to-[#050509] text-white font-sans overflow-x-hidden">
-      {/* Kosmischer Background */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute top-20 left-10 w-40 h-40 bg-pink-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-10 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl" />
-        <div className="absolute -top-10 right-1/3 w-80 h-80 bg-purple-500/10 rounded-full blur-2xl" />
-      </div>
+    <main className="min-h-screen bg-gradient-to-b from-black via-[#0c0c1c] to-[#050509] text-white font-sans px-6 py-12 overflow-hidden">
+      <div className="max-w-4xl mx-auto relative">
+        <div className="absolute -top-20 -left-20 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-10 -right-10 w-96 h-96 bg-cyan-400/20 rounded-full blur-3xl animate-ping"></div>
 
-      <section className="sticky top-0 z-20 bg-black/80 backdrop-blur-lg border-b border-zinc-800 shadow-sm px-4 py-4">
-        <h1 className="text-3xl sm:text-4xl font-bold text-center text-cyan-300 tracking-wide">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-500 drop-shadow-xl animate-fade-in-up">
           VELAR
         </h1>
-        <p className="text-center text-sm text-slate-400">Dein Space-Migräne Companion · 2025 ready</p>
-      </section>
+        <p className="text-center text-slate-400 mt-2 text-md italic animate-fade-in-up delay-150">
+          Dein Space-Migräne Companion
+        </p>
 
-      <div className="px-4 py-6 max-w-5xl mx-auto w-full">
-        <Tabs value={tab} onValueChange={setTab} className="w-full">
-          <TabsList className="flex justify-center flex-wrap sticky top-[65px] z-10 bg-black/70 backdrop-blur-md py-2 rounded-xl mb-6 gap-2">
-            <TabsTrigger value="forecast">🌌 Forecast</TabsTrigger>
-            <TabsTrigger value="logs">📋 Logs</TabsTrigger>
-            <TabsTrigger value="export">📤 Export</TabsTrigger>
-            <TabsTrigger value="alerts">🤖 KI-Warnung</TabsTrigger>
-          </TabsList>
+        <div className="mt-10 animate-fade-in-up delay-300">
+          <Tabs defaultValue="forecast" className="w-full">
+            <TabsList className="bg-black/40 backdrop-blur-md rounded-xl p-1 flex justify-center gap-2 flex-wrap border border-white/10 shadow-md">
+              <TabsTrigger value="forecast" className="tab-button">
+                🧠 Forecast
+              </TabsTrigger>
+              <TabsTrigger value="logs" className="tab-button">
+                📒 Logs
+              </TabsTrigger>
+              <TabsTrigger value="export" className="tab-button">
+                📄 Export
+              </TabsTrigger>
+              <TabsTrigger value="alerts" className="tab-button">
+                ⚠️ KI-Warnung
+              </TabsTrigger>
+            </TabsList>
 
-          <TabsContent value="forecast" activeValue={tab}>
-            <VelarDashboard />
-          </TabsContent>
-
-          <TabsContent value="logs" activeValue={tab}>
-            <LogsPanel />
-          </TabsContent>
-
-          <TabsContent value="export" activeValue={tab}>
-            <div className="bg-zinc-900 p-6 rounded-xl shadow-lg">
-              <PdfExportButton />
+            <div className="mt-8 space-y-6">
+              <TabsContent value="forecast">
+                <VelarDashboard />
+              </TabsContent>
+              <TabsContent value="logs">
+                <LogsPanel />
+              </TabsContent>
+              <TabsContent value="export">
+                <PdfExportButton />
+              </TabsContent>
+              <TabsContent value="alerts">
+                <BotAlert />
+              </TabsContent>
             </div>
-          </TabsContent>
-
-          <TabsContent value="alerts" activeValue={tab}>
-            <BotAlert />
-          </TabsContent>
-        </Tabs>
+          </Tabs>
+        </div>
       </div>
+
+      <style jsx global>{`
+        .tab-button {
+          @apply text-sm px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-white transition-all duration-300 shadow-sm;
+        }
+        @keyframes fade-in-up {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in-up {
+          animation: fade-in-up 0.8s ease-out both;
+        }
+        .delay-150 {
+          animation-delay: 0.15s;
+        }
+        .delay-300 {
+          animation-delay: 0.3s;
+        }
+      `}</style>
     </main>
   );
 }
-

@@ -1,14 +1,11 @@
 'use client'
 
-import { exportMigraineReport } from '@/lib/pdfExport'
+import React from "react";
 
 export function PdfExportButton() {
   return (
-    <button
-      onClick={exportMigaineReport}
-      className="px-6 py-2 bg-pink-600 hover:bg-pink-700 text_white rounded-xl transition font-semibold"
-    >
-      PDF exportieren
+    <button className="bg-cyan-600 hover:bg-cyan-700 text-white font-medium px-4 py-2 rounded-lg transition">
+      📄 Exportieren als PDF
     </button>
-  )
+  );
 }
