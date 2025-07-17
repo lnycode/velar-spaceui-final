@@ -1,13 +1,8 @@
 'use client';
 
-import Image from 'next/image';
-import React from 'react';
-const  VelarLogo = () => {
+export default function VelarLogo() {
   return (
-    <div className="flex justify-center">
-      <Image src="/velar-logo.png" alt="Velar Logo" width={120} height={120} />
-    </div>
+    <img src="/icons/logo-v.png" alt="Velar Logo" className="h-12 w-auto animate-pulse" />
   );
-};
+}
 
-export default VelarLogo;

@@ -1,53 +1,49 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Calendar } from '@/components/ui/calendar';
 import { useState } from 'react';
+import Calendar from './ui/calendar';
+import BotAlert from './BotAlert';
 
 export default function ForecastTab() {
-  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [forecastResult, setForecastResult] = useState<{
+    probability: number;
+    reason: string;
+  } | null>(null);
+
+  const aiForecastLogic = (date: Date) => {
+    // Dummy-Logik: KI analysiert Datum und Wetterlage (hier: zufällig simuliert)
+    const weekday = date.getDay(); // 0 = Sonntag, 6 = Samstag
+    const isWeekend = weekday === 0 || weekday === 6;
+
+    const probability = Math.round(Math.random() * 100);
+    const reason = isWeekend
+      ? 'Wochenenden zeigen typischerweise erhöhte Aktivität.'
+      : 'Wochentage sind stabiler, aber mit Schwankungspotenzial.';
+
+    setForecastResult({ probability, reason });
+  };
 
   return (
-    <div className="space-y-6 text-center">
-      <motion.h2
-        className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-teal-300 bg-clip-text text-transparent"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-      >
-        Migräne-Vorhersage
-      </motion.h2>
+    <div className="w-full space-y-6 p-4">
+      <Calendar onDateChange={(date) => {
+        setSelectedDate(date);
+        aiForecastLogic(date);
+      }} />
 
-      <motion.div
-        className="text-sm text-slate-400"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-      >
-        Wähle ein Datum und erhalte die Prognose:
-      </motion.div>
+      {forecastResult && (
+        <div className="bg-[#111827] p-4 rounded-lg border border-gray-700 shadow-md text-white">
+          <h2 className="text-lg font-bold mb-2">⚡ Prognoseergebnis</h2>
+          <p className="text-2xl font-extrabold text-blue-400 mb-2">
+            Wahrscheinlichkeit: {forecastResult.probability}%
+          </p>
+          <p className="text-sm text-gray-300 italic">
+            KI-Begründung: {forecastResult.reason}
+          </p>
+        </div>
+      )}
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.5 }}
-        className="flex justify-center"
-      >
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
-          className="bg-zinc-900 border border-zinc-700 rounded-xl shadow-md"
-        />
-      </motion.div>
-
-      <motion.div
-        className="text-lg text-teal-400"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.7 }}
-      >
-        {date ? `Vorhersage für ${date.toLocaleDateString()}: 🌌 42 % Risiko` : 'Kein Datum gewählt'}
-      </motion.div>
+      <BotAlert />
     </div>
   );
 }
