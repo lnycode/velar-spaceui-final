@@ -3,28 +3,13 @@ import axios from 'axios';
 
 const API_KEY = process.env.OPENWEATHER_API_KEY;
 
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const lat = searchParams.get('lat');
-  const lon = searchParams.get('lon');
-
-  if (!lat || !lon) {
-    return NextResponse.json({ error: 'Latitude and Longitude are required' }, { status: 400 });
-  }
-  
+export async function GET() {
   try {
-    const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?lat=51.5074&lon=0.1278&units=metric&appid=64ba8ed040e1ea8fb7bb7d319b8497ad`
-    );
+  const { searchParams } = new URL(req.url);
+  const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Berlin&appid=${64ba8ed040e1ea8fb7bb7d319b8497ad`};
+  const lon = await res.json();
 
-    const { main, weather } = response.data;
-
-    return NextResponse.json({
-      temperature: main.temp,
-      pressure: main.pressure,
-      humidity: main.humidity,
-      description: weather[0].description,
-    ,};
+    return NextResponse.json({ weather: data }, { status: 200 });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

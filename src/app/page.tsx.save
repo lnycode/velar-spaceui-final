@@ -1,0 +1,18 @@
+'use client'; import { Line, Doughnut } from 'react-chartjs-2'; import { Chart as ChartJS, CategoryScale, PointElement, LineElement, ArcElement, Tooltip, Legend } from 'chart.js'; import { motion } from 'framer-motion'; import { useEffect, useState } from 'react'; ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Tooltip, Legend);
+
+export default function Home() {
+  const [weather, setWeather] = useState<any>(null);
+  useEffect(() =>  { fetch(`https://api.openweather.org/data/2.5/weather?q=Berlin&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`).then(res => res.json()).then(setWeather); }, []);
+  
+  const chartData = { labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'], datasets: [{ data: [2, 1, 4, 6, 2], borderColor: '#67e8f9', tension: 0.4 }] };
+  const donutData = { labels: ['Stress', 'Wertter', 'Trigger'], datasets: [{ data: [30, 40, 30], backgroundColor: ['#fa8d4', '#67e8f9', '#a5b4fc'], borderWidth: 2 }] };
+
+  return (
+    <main className="min-h-screen bg-[#0b0c1d] text-white px-6 py-12 font-sans grid gap-10">
+      <motion.div inital={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration 0.8 }} className="bg-[#13142b] bg-opacity-60 rounded-3x1 p-6 backdrop-blur-md shadow-1g">
+        <h1 className="text-3x1 font-bold text-pink-300 mb-2">Migraine Forecast</h1>
+        <p className="text-cyan-300 mb-4 flex itmes-center gap-2">🧠 Moderate Risk ({weather?.weather?.[0]?.main || 'Loading'} )</p>
+        <div className="bg-[#0f1025] p-4 rounded x1"><Line data={chartData} options={{ responsive: true, plugins: { legend: { display: false } }, sclaes: { y: { ticks: { color: '#94a3b8' } } } }} /></div>
+      </motion.div> 
+
+      <motion.div inital={{ opacity: 0, y: 20 }} animate=
