@@ -10,7 +10,7 @@ type TabsProps = {
   children: React.ReactNode;
 };
 
-export function Tabs({ value, onValueChange, className, children }: TabsProps) {
+export default function Tabs({ value, onValueChange, className, children }: TabsProps) {
   return (
     <div className={cn('w-full', className)}>
       {React.Children.map(children, (child) =>
@@ -27,7 +27,7 @@ type TabsListProps = {
   className?: string;
 };
 
-export function TabsList({ children, className }: TabsListProps) {
+export default function TabsList({ children, className }: TabsListProps) {
   return (
     <div className={cn('flex gap-2 bg-zinc-800 p-2 rounded-xl', className)}>
       {children}
@@ -42,7 +42,7 @@ type TabsTriggerProps = {
   children: React.ReactNode;
 };
 
-export function TabsTrigger({ value, activeValue, onChange, children }: TabsTriggerProps) {
+export default function TabsTrigger({ value, activeValue, onChange, children }: TabsTriggerProps) {
   const isActive = value === activeValue;
 
   return (
@@ -64,7 +64,7 @@ type TabsContentProps = {
   children: React.ReactNode;
 };
 
-export function TabsContent({ value, activeValue, children }: TabsContentProps) {
+export default function TabsContent({ value, activeValue, children }: TabsContentProps) {
   if (value !== activeValue) return null;
   return <div className="mt-4">{children}</div>;
 }

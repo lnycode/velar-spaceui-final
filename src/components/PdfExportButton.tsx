@@ -1,11 +1,19 @@
-'use client'
+'use client';
+import React from 'react';
 
-import React from "react";
+const PdfExportButton = () => {
+  const handleExport = () => {
+    alert('PDF-Export ausgelöst! (Mockup)');
+  };
 
-export function PdfExportButton() {
   return (
-    <button className="bg-cyan-600 hover:bg-cyan-700 text-white font-medium px-4 py-2 rounded-lg transition">
-      📄 Exportieren als PDF
+    <button
+      onClick={handleExport}
+      className="px-4 py-2 rounded bg-cyan-600 hover:bg-cyan-700 text-white font-semibold"
+    >
+      Exportiere als PDF
     </button>
   );
-}
+};
+
+export default PdfExportButton;

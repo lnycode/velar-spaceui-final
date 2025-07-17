@@ -1,15 +1,13 @@
-"use client";
+'use client';
+import React from 'react';
 
-import React from "react";
-
-export function BotAlert() {
+const BotAlert = () => {
   return (
-    <div className="bg-gradient-to-r from-purple-900 to-cyan-900 p-6 rounded-xl shadow-lg space-y-3 border border-cyan-800">
-      <h2 className="text-xl font-semibold text-pink-400">🤖 KI-Warnung</h2>
-      <p className="text-sm text-slate-200">
-        Basierend auf deinen Logs sind die nächsten 48h ein Risikofenster für eine Migräne-Episode. 🧠
-      </p>
-      <p className="text-sm text-cyan-300">Empfehlung: Trinke genug Wasser und meide Stressoren.</p>
+    <div className="p-4 rounded-lg bg-red-900/40 border border-red-500 text-red-200">
+      <h2 className="text-lg font-bold">🚨 KI-Warnung</h2>
+      <p>Basierend auf deinen Logs und dem aktuellen Wetter besteht ein erhöhtes Migräne-Risiko.</p>
     </div>
   );
-}
+};
+
+export default BotAlert;
